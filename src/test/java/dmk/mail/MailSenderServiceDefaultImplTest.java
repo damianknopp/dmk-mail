@@ -1,7 +1,5 @@
 package dmk.mail;
 
-import java.util.Arrays;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;

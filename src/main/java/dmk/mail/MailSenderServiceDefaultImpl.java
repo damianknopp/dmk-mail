@@ -17,9 +17,19 @@ import org.slf4j.LoggerFactory;
 public class MailSenderServiceDefaultImpl implements MailSenderService {
 	Logger logger = LoggerFactory.getLogger(MailSenderServiceDefaultImpl.class);
 	
+	protected String emailAddr;
+	protected String pass;
+	
 	public MailSenderServiceDefaultImpl() {
 		super();
 	}
+
+	public MailSenderServiceDefaultImpl(final String emailAddr, final String pass) {
+		super();
+		this.emailAddr = emailAddr;
+		this.pass = pass;
+	}
+
 
 	public void send(final String subject, final String content, final String... recipients) {
 		Validate.notBlank(subject);
@@ -40,8 +50,8 @@ public class MailSenderServiceDefaultImpl implements MailSenderService {
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("xxx@gmail.com",
-								"xxx");
+						return new PasswordAuthentication(emailAddr,
+								pass);
 					}
 				});
 
@@ -74,5 +84,21 @@ public class MailSenderServiceDefaultImpl implements MailSenderService {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public String getEmailAddr() {
+		return emailAddr;
+	}
+
+	public void setEmailAddr(String emailAddr) {
+		this.emailAddr = emailAddr;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 }
