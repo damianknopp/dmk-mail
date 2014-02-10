@@ -73,7 +73,7 @@ public class MailSenderServiceDefaultImpl implements MailSenderService {
 			message.setFrom(new InternetAddress("dmknopp@no-reply"));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(sb.toString()));
-			message.setSubject("Test subject");
+			message.setSubject(subject);
 			message.setText(content);
 
 			Transport.send(message);
